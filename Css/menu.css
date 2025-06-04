@@ -1,0 +1,860 @@
+/* ============================================= */
+/* FUENTES Y VARIABLES */
+/* ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #e74c3c;
+  --secondary-color: #2c3e50;
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
+  --border-radius: 12px;
+}
+
+/* ============================================= */
+/* ESTILOS BASE */
+/* ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark-color);
+  line-height: 1.6;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============================================= */
+/* COMPONENTES GENERALES */
+/* ============================================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+
+/* Estilos para los botones de filtrado */
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+.filter-btn.active {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
+
+.filter-btn:hover:not(.active) {
+    background-color: #e03030;
+}
+
+/* Animación para los elementos filtrados */
+.category-item {
+    transition: all 0.4s ease;
+}
+
+.category-item.hidden {
+    display: none;
+}
+
+/* ============================================= */
+/* HEADER Y NAVEGACIÓN */
+/* ============================================= */
+.nav-link {
+    position: relative;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: black !important;
+}
+
+/* Estilos del header y navegación */
+.navbar {
+    padding: 1rem 0;
+}
+
+/* Estilos de navegación */
+.navbar {
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: #e74c3c !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-img {
+    width: 40px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.1);
+}
+
+.brand-text {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Estilos de las secciones */
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Estilos de las categorías */
+.category-item {
+    transition: all 0.3s ease;
+}
+
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.category-card img {
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+.section-heading::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #e74c3c;
+    margin: 1rem auto 0;
+}
+
+/* Estilos de los filtros */
+.filter-btn {
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+    margin: 0.25rem;
+}
+
+.filter-btn.active {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+}
+
+.filter-btn:hover:not(.active) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Estilos de las recetas */
+.recipe-item {
+    transition: transform 0.3s ease;
+}
+
+.recipe-item:hover {
+    transform: translateY(-5px);
+}
+
+.card {
+    border: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+/* Estilos del modal */
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem;
+    background: linear-gradient(to right, #e74c3c, #ff7675);
+}
+
+.modal-header .modal-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.modal-header .btn-close {
+    color: white;
+    opacity: 1;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+/* Estilos para la imagen */
+.recipe-image-container {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.recipe-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.recipe-image-container:hover img {
+    transform: scale(1.05);
+}
+
+/* Estilos para las secciones de información */
+.recipe-info-section {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #e74c3c;
+}
+
+.recipe-info-section h6 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.recipe-info-section h6 i {
+    margin-right: 0.5rem;
+    color: #e74c3c;
+}
+
+.recipe-info-section p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Meta información */
+.recipe-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-top: 1.5rem;
+}
+
+.recipe-meta-info p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.recipe-meta-info i {
+    color: #e74c3c;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Pasos de preparación */
+.preparation-steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+}
+
+.preparation-steps li {
+    position: relative;
+    padding: 1rem 1rem 1rem 3rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.preparation-steps li::before {
+    content: counter(step);
+    counter-increment: step;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal.show .modal-content {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Encabezados de sección */
+.section-heading {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #e74c3c;
+    transition: width 0.3s ease;
+}
+
+.section-heading:hover::after {
+    width: 100px;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transiciones suaves para los elementos filtrados */
+.category-item,
+.recipe-item {
+    transition: all 0.5s ease;
+}
+
+.category-item.hidden,
+.recipe-item.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+/* ============================================= */
+/* RESPONSIVE */
+/* ============================================= */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .category-card {
+    margin-bottom: 1rem;
+  }
+
+  .recipe-item {
+    margin-bottom: 2rem;
+  }
+
+  .modal-body {
+        padding: 1rem;
+    }
+
+    .recipe-meta-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .recipe-image-container {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 20px;
+  }
+}
+.filter-btn.active {
+  background-color: #0d6efd; /* Color de fondo azul */
+  color: white; /* Texto blanco */
+  border-color: #0d6efd; /* Borde azul */
+}
+
+/* Estilos para las tarjetas de recetas */
+.recipe-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px) scale(1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: white;
+}
+
+.recipe-card img {
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover img {
+    transform: scale(1.05);
+}
+
+.recipe-card .card-body {
+    position: relative;
+    z-index: 1;
+    background: white;
+}
+
+.category-badge {
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover .category-badge {
+    background-color: #0056b3 !important;
+}
+
+.stars {
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover .stars .fa-star {
+    color: #ffd700 !important;
+    transform: rotate(360deg);
+    transition: transform 0.5s ease;
+}
+
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover .btn-primary {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilos para la sección de comentarios */
+.comentarios-container {
+    max-height: 500px;
+    overflow-y: auto;
+    
+}
+
+.comentario {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+    
+}
+
+.comentario:last-child {
+    border-bottom: none;
+    
+}
+
+.rating {
+    color: #ffc107;
+    cursor: pointer;
+}
+
+.rating i {
+    margin-right: 5px;
+}
+
+.rating i.fas {
+    color: #ffc107;
+}
+
+.respuesta {
+    margin-left: 3rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.comentario-actions {
+    margin-top: 0.5rem;
+    
+}
+
+.comentario-actions button {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    
+}
+
+/* Estilos para comentarios */
+.comment-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+     border-color: black;
+}
+
+.comment-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    
+}
+
+.comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.comment-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment-info {
+    flex: 1;
+}
+
+.comment-author {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.comment-text {
+    margin-top: 1rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* Estilos para el formulario de comentarios */
+.rating-stars {
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 5px;
+    
+}
+textarea.form-control {
+    min-height: calc(1.5em + .75rem + calc(var(--bs-border-width) * 2));
+    border-color: black;
+}
+
+.rating-stars i {
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+
+.rating-stars i.fas {
+    color: #ffd700;
+}
+
+.rating-stars i:hover {
+    transform: scale(1.1);
+}
+
+#formComentario input[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+     border-color: black;
+}
+
+#formComentario label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    
+}
+
+#formComentario .form-label::after {
+    content: " *";
+    color: #dc3545;
+    
+}
+
+/* Estilos para las respuestas */
+.replies-container {
+    margin-left: 3rem;
+    margin-top: 1rem;
+    border-left: 2px solid #eee;
+    padding-left: 1.5rem;
+     border-color: black;
+}
+
+.reply-card {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.reply-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.reply-author {
+    font-weight: 600;
+    color: #333;
+}
+
+.reply-date {
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.reply-content {
+    color: #444;
+    line-height: 1.4;
+}
+
+/* Estilos para el formulario de respuestas */
+.reply-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+   
+}
+
+.reply-form textarea {
+    border: 1px solid #ddd;
+    margin-bottom: 0.5rem;
+    border-color: black;
+    
+}
+
+.rating-info {
+    display: flex;
+    align-items: center;
+    
+}
+
+.stars {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.stars i {
+    font-size: 1rem;
+}
+
+.fa-star-half-alt {
+    position: relative;
+    display: inline-block;
+}
+
+/* Estilos para el modal de recetas */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: #e74c3c;
+    padding: 1.5rem;
+    border: none;
+    position: relative;
+    color: white;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Estilos para el botón de cerrar */
+.btn-close {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    opacity: 1;
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-close:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Contenedor de imagen estandarizado */
+.recipe-image-container {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.recipe-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Estilos para las secciones de información */
+.recipe-info-section {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #e74c3c;
+}
+
+.recipe-info-section h6 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+    .recipe-image-container {
+        height: 200px;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .btn-close {
+        padding: 0.75rem;
+    }
+}

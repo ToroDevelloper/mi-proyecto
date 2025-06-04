@@ -1,0 +1,4 @@
+ALTER TABLE comentarios
+ADD COLUMN nombre_usuario VARCHAR(100) AFTER usuario_id,
+MODIFY COLUMN calificacion INT CHECK (calificacion BETWEEN 1 AND 5),
+MODIFY COLUMN fecha_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

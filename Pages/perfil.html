@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Recetas De Comidas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Css/perfil.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-utensils me-2"></i>Recetas De Comidas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Menu.html"><i class="fas fa-book me-1"></i> Recetas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="perfil.html"><i class="fas fa-user me-1"></i> Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="cerrarSesion"><i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="profile-header text-white py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">
+                <i class="fas fa-user-circle me-2"></i> Mi Perfil
+            </h1>
+            <p class="lead">Administra tus recetas y datos personales</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mb-5">
+        <div class="row g-4">
+            <!-- Información del usuario -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom-0">
+                        <h3 class="card-title mb-0 text-center">
+                            <i class="fas fa-user-circle me-2 text-primary"></i>Información Personal
+                        </h3>
+                    </div>
+                    <div class="card-body text-center py-4">
+                        <div class="text-center mb-4">
+                            <div class="profile-image-container">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+                                     alt="Foto de perfil" 
+                                     id="profileImage"
+                                     onerror="this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'">
+                            </div>
+                            <div class="mt-2">
+                                <input type="file" 
+                                       id="photoInput" 
+                                       accept="image/*" 
+                                       style="display: none;">
+                                <button class="btn btn-sm btn-outline-primary me-2" id="changePhotoBtn">
+                                    <i class="fas fa-camera me-1"></i>Cambiar foto
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" id="viewPhotoBtn">
+                                    <i class="fas fa-eye me-1"></i>Ver foto
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-start">
+                            <p><strong><i class="fas fa-user me-2 text-secondary"></i>Nombre:</strong> 
+                                <span id="user-name" class="d-block mt-1">Cargando...</span>
+                            </p>
+                            <p><strong><i class="fas fa-envelope me-2 text-secondary"></i>Email:</strong> 
+                                <span id="user-email" class="d-block mt-1">Cargando...</span>
+                            </p>
+                            <p><strong><i class="fas fa-calendar-alt me-2 text-secondary"></i>Miembro desde:</strong> 
+                                <span id="user-join-date" class="d-block mt-1">Enero 2024</span>
+                            </p>
+                        </div>
+                        <button class="btn btn-primary mt-3 w-100" data-bs-toggle="modal" data-bs-target="#editarPerfilModal">
+                            <i class="fas fa-edit me-1"></i> Editar Perfil
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recetas del usuario -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-utensils me-2 text-primary"></i>Mis Recetas
+                            </h3>
+                            <a href="#" class="btn btn-sm btn-success" id="btnNuevaReceta">
+                                <i class="fas fa-plus me-1"></i> Nueva Receta
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="user-recipes" class="row g-3">
+                            <div class="col-12 text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <p class="mt-2">Cargando tus recetas...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo d-flex align-items-center mb-3">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1830/1830878.png" alt="RDC Logo" class="logo-img me-2" style="height: 40px;">
+                        <span class="fs-4">Recetas De Comidas</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <h3 class="h5 text-white mb-3">Navegación</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-white-50">Inicio</a></li>
+                        <li class="mb-2"><a href="AcercaDe.html" class="text-decoration-none text-white-50">Acerca De</a></li>
+                        <li class="mb-2"><a href="Menu.html" class="text-decoration-none text-white-50">Menú</a></li>
+                        <li class="mb-2"><a href="conctato.html" class="text-decoration-none text-white-50">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <h3 class="h5 text-white mb-3">Categorías</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="Menu.html?categoria=desayunos" class="text-decoration-none text-white-50">Desayunos</a></li>
+                        <li class="mb-2"><a href="Menu.html?categoria=comidas" class="text-decoration-none text-white-50">Comidas</a></li>
+                        <li class="mb-2"><a href="Menu.html?categoria=postres" class="text-decoration-none text-white-50">Postres</a></li>
+                        <li class="mb-2"><a href="Menu.html?categoria=bebidas" class="text-decoration-none text-white-50">Bebidas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <h3 class="h5 text-white mb-3">Contacto</h3>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> 3134349114</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> RecetasLegarda@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-4 pt-4 text-center text-white-50">
+                <p>&copy; 2025 Recetas De Comidas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Modal de Editar Perfil -->
+    <div class="modal fade" id="editarPerfilModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-edit me-2"></i>Editar Perfil
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarPerfilForm">
+                        <div class="mb-3">
+                            <label for="editNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editNombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-primary" id="guardarDatosBasicos">
+                                <i class="fas fa-save me-1"></i>Guardar Datos
+                            </button>
+                        </div>
+                        
+                        <hr>
+                        <h6 class="mb-3">Cambiar Contraseña</h6>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Contraseña Actual</label>
+                            <input type="password" class="form-control" id="currentPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="newPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="confirmNewPassword">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <a href="#" id="forgotPasswordLink" class="text-primary">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-12 text-center mb-3">
+                                <small class="text-muted">Si eliminas tu cuenta, se borrará permanentemente toda tu información, incluyendo tus recetas publicadas.</small>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-danger" id="eliminarCuenta">
+                                        <i class="fas fa-user-times me-1"></i>Eliminar Cuenta
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="guardarPassword">
+                                        <i class="fas fa-key me-1"></i>Cambiar Contraseña
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Nueva Receta -->
+    <div class="modal fade" id="nuevaRecetaModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-plus-circle me-2"></i>Nueva Receta
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevaRecetaForm">
+                        <div class="mb-3">
+                            <label for="nombreReceta" class="form-label">Nombre de la Receta</label>
+                            <input type="text" class="form-control" id="nombreReceta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoriaReceta" class="form-label">Categoría</label>
+                            <select class="form-select" id="categoriaReceta" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="desayunos">Desayunos</option>
+                                <option value="comidas">Comidas</option>
+                                <option value="postres">Postres</option>
+                                <option value="bebidas">Bebidas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tiempoPreparacion" class="form-label">Tiempo de Preparación (minutos)</label>
+                            <input type="number" class="form-control" id="tiempoPreparacion" min="1" required 
+                                   placeholder="Ej: 30">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ingredientes" class="form-label">Ingredientes</label>
+                            <textarea class="form-control" id="ingredientes" rows="4" required 
+                                    placeholder="Escribe cada ingrediente en una nueva línea"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pasos" class="form-label">Pasos de Preparación</label>
+                            <textarea class="form-control" id="pasos" rows="4" required
+                                    placeholder="Escribe cada paso en una nueva línea"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagenUrl" class="form-label">URL de la Imagen</label>
+                            <input type="url" class="form-control" id="imagenUrl" 
+                                   placeholder="https://ejemplo.com/imagen.jpg">
+                        </div>
+                        <div class="mb-3">
+                            <label for="infoNutricional" class="form-label">Información Nutricional (opcional)</label>
+                            <textarea class="form-control" id="infoNutricional" rows="3"
+                                    placeholder="Calorías, proteínas, etc."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="guardarReceta">
+                        <i class="fas fa-save me-1"></i>Guardar Receta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Añade este modal antes del cierre del body -->
+    <div class="modal fade" id="editarRecetaModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-edit me-2"></i>Editar Receta
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarRecetaForm">
+                        <input type="hidden" id="editRecipeId">
+                        <div class="mb-3">
+                            <label for="editNombreReceta" class="form-label">Nombre de la Receta</label>
+                            <input type="text" class="form-control" id="editNombreReceta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCategoriaReceta" class="form-label">Categoría</label>
+                            <select class="form-select" id="editCategoriaReceta" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="desayunos">Desayunos</option>
+                                <option value="comidas">Comidas</option>
+                                <option value="postres">Postres</option>
+                                <option value="bebidas">Bebidas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTiempoPreparacion" class="form-label">Tiempo de Preparación (minutos)</label>
+                            <input type="number" class="form-control" id="editTiempoPreparacion" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editIngredientes" class="form-label">Ingredientes</label>
+                            <textarea class="form-control" id="editIngredientes" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPasos" class="form-label">Pasos de Preparación</label>
+                            <textarea class="form-control" id="editPasos" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editImagenUrl" class="form-label">URL de la Imagen</label>
+                            <input type="url" class="form-control" id="editImagenUrl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editInfoNutricional" class="form-label">Información Nutricional</label>
+                            <textarea class="form-control" id="editInfoNutricional" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="guardarEdicionReceta">
+                        <i class="fas fa-save me-1"></i>Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar este nuevo modal para la pregunta de seguridad -->
+    <div class="modal fade" id="securityQuestionModalProfile" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shield-alt me-2"></i>Verificación de Seguridad
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="securityQuestionFormProfile">
+                        <div class="mb-3">
+                            <label class="form-label">Pregunta de Seguridad</label>
+                            <select class="form-select" id="securityQuestionSelectProfile" required>
+                                <option value="">Seleccione una pregunta</option>
+                                <option value="¿Cuál es el nombre de tu primera mascota?">¿Cuál es el nombre de tu primera mascota?</option>
+                                <option value="¿Cuál es tu nombre completo?">¿Cuál es tu nombre completo?</option>
+                                <option value="¿En qué ciudad naciste?">¿En qué ciudad naciste?</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Respuesta</label>
+                            <input type="text" class="form-control" id="securityAnswerProfile" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="verifyAnswerBtnProfile">Verificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar antes de los otros scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Bootstrap JS y Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../Js/perfil.js"></script>
+</body>
+</html>
