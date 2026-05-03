@@ -2,48 +2,47 @@
 # Dependencies
 node_modules/
 
+# Build artifacts
+dist/
+build/
+*.js
+*.jsx
+*.css
+*.scss
+*.sass
+
 # Environment variables
 .env
 .env.local
-.env.*
+*.env.*
 
-# Build outputs
-dist/
-build/
-target/
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
 
 # Logs
 *.log
 
-# Temporary files
-*.tmp
-*.swp
-*.swo
-
-# IDE and editor files
-.vscode/
-.idea/
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Package lock files
-package-lock.json
+# Python cache (if any Python files exist in project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Coverage reports
 coverage/
 htmlcov/
 *.coverage
 
-# Python related (if any Python files exist in the project)
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-.coverage
-.pytest_cache/
-.mypy_cache/
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+.nyc_output/
+coverage/
+junit.xml
 ```
